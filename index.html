@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Documentation - alpharooq</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <link href="src/styles.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <section class="box_home">
+            <div class="content">
+                <h1>Alpharooq MVC</h1>
+                <p>وصف مختصر لهذا الاطار</p>
+                <div class="commands">
+                    <p class="comment">// clone the repository</p>
+                    <p class="command">git clone https://github.com/alpharooq/alpharooq</p>
+                    <p class="comment">// go into the repository</p>
+                    <p class="command">cd alpharooq</p>
+                    <p class="comment">// alpharooq init</p>
+                    <p class="command">php rooq init</p>
+                    <p class="comment">// alpharooq run server</p>
+                    <p class="command">php rooq server</p>
+                </div>
+                <br>
+                <p><a href="#" godiv="init" class="docs">Documentation</a></p>
+            </div>
+        </section>
+        <section class="box_home_des">
+
+        </section>
+        <div class="container">
+            <div class="row" id="pinBoxContainer">
+                <div class="col-md-3">
+                    <section class="list">
+                        <div class="list-group">
+                            <a href="#" godiv="init" class="list-group-item">تجهيز المشروع - init</a>
+                            <a href="#" godiv="routes" class="list-group-item">الاتجاهات - routes</a>
+                            <a href="#" godiv="controller" class="list-group-item">التعامل مع المتحكم - controller</a>
+                            <a href="#" godiv="model" class="list-group-item">التحكم في نموذج - model</a>
+                            <a href="#" godiv="view" class="list-group-item">عرض - view</a>
+                        </div>
+                        <div class="list-group">
+                            <a href="#" godiv="librarys" class="list-group-item">المكتبات - librarys</a>
+<!--                            <a href="#" godiv="routes" class="list-group-item">قواعد البينات - db</a>-->
+                            <a href="#" godiv="langs" class="list-group-item">تعدد اللغات - lang</a>
+                            <a href="#" godiv="rooq" class="list-group-item">اوامر - rooq</a>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-md-9">
+                    <section class="docs">
+                        <!-- init -->
+                        <div class="doc" id="init">
+                            <div class="title"># تجهيز المشروع</div>
+                            <p>لتجهيز المشروع لاول مره فانت تحتاج الي التعرف الي بعض الامور الهامه في النظام مثل في ملف app.php والتي ينتلق منها كل شئ مهم في المشروع</p>
+<pre>'key' => 'set_key'</pre>
+                            <p>كيفية اخراج مفتاح خاص بك من النظام .. يمكنك كتابه الامر التالي</p>
+                            <div class="command">php rooq key</div>
+                            <p>هذا الامر سوف يقوم باخر نتيجه مثل <code>8d7f385e2dd12c2672a76d2467b0fef1</code> يمكنك استخدام هذه القيمه لتكون هي مفتاح التطبيق الخاص بك .. ليكون الكود بهذا الشكل</p>
+<pre>'key' => '8d7f385e2dd12c2672a76d2467b0fef1'</pre>
+                            <p>والان انت تحتاج الي اخراج ملفات العمل لكي تتمكن من انشاء مشروعك بنجاح لذلك نكتب الامر التالي وهو</p>
+                            <div class="command">php rooq init</div>
+                            <p>سوف تلاحظ في مجلد العمل باخراج مجموعه من الملفات والمجلدات الاخري وانت الان جاهز للعمل علي نظامك الجديد</p>
+                            <p>لتشغيل مشروعك بشكل مباشر من خلال rooq</p>
+                            <div class="command">php rooq server || php rooq server port 5464</div>
+                            <p>اما اذا كنت سوف تقوم بتشغيل مشروعك من localhost .. فانت تحتاج الي تحرير ملف app.php واضافه عنوان URL الي القيمه url</p>
+<pre>'url' => 'http://localhost:3000/'</pre>
+                        </div>
+                        <!-- /init -->
+                        <!-- routes -->
+                        <div class="doc" id="routes">
+                            <div class="title"># الاتجاهات - Routes</div>
+                            <p>والان نتحدث عن ثاني اهم ملف في النظام وهو routes.php والذي سوف يكون بشكل التالي</p>
+<pre>
+// routes
+route::get('/',function(){
+    controller::__('index.def@home');
+});
+route::other('/');
+route::run();
+</pre>
+                            <p>وهذا شكل الملف الافتراضي والذي يعمل علي المسار <code>/</code></p>
+                            <p><b>تمرير البيانات</b></p>
+                            <p>هنا سوف نقوم بتمرير id للمستخدم ومن خلال الدخول علي المسار التالي <code>/user/1</code> وهنا سوف يكون العرض id المستخدم</p>
+<pre>
+route::get('/user/(.*)',function($id){
+    echo 'user id' . $id;
+});
+</pre>
+                            <p>ويمكن تمرير البيانات الي المتحكم (controller) ويمكنك اجراء مجموعه اوامر علي هذه البيانات التي تم تمريرها الي المتحكم</p>
+<pre>
+route::get('/user/(.*)',function($id){
+    controller::__('index.def@home',[$id]);
+});
+</pre>
+                            <p>ويكون شكل الدالة (function) بهذا الشكل</p>
+<pre>
+public function home ($id) {
+    echo $id;
+</pre>
+                            <p><b>الاجراء post</b></p>
+<pre>
+route::post('/login',function(){
+    controller::__('index.users@login');
+});
+</pre>
+                            <p><b>استخدام other</b></p>
+                            <p>وهنا نقوم باستخدام هذه الداله (function) هي تقوم بالرجوع الي القيمه المحددة كماهي في المثال الاول وهو يقوم بتحويل علي هذا المسار في حاله طلب مسار غير معروف لديك</p>
+                        </div>
+                        <!-- /routes -->
+                        <!-- controller -->
+                        <div class="doc" id="controller">
+                            <div class="title"># المتحكم - Controller</div>
+                            <p>نعمل مع العقل المدبر والمسؤل عن عرض البيانات والتحكم فيها والتواصل مع قواعد البيانات</p>
+                            <br />
+                            <p><b>إنشاء متحكم جديد (New Controller)</b></p>
+                            <div class="command">php rooq mkcontroller index users</div>
+                            <ul>
+                                <li>index هو اسم التطبيق .. يجب تحديد اسم التطبيق من اجل انشاء متحكم لهذا التطبيق</li>
+                                <li>users هو اسم المتحكم الجديد</li>
+                            </ul>
+                            <p>سوف يكون اسم الملف بهذا الشكل <code>controller.users.php</code> ولكن بالداخل الملف يكون</p>
+<pre>
+class controllerUsers extends controller
+{ ...
+</pre>
+                            <p>يكون اول حرف من اسم المتحكم كبير (capital)</p>
+                            <br />
+                            <p><b>استدعاء المتحكم</b></p>
+                            <p>ويمكنك استدعاء المتحكم بكل سهولة من خلال الكود التالي</p>
+<pre>
+controller::__('index.users@get_info');
+</pre>
+                            <p>وهنا يكون اسم الداله (function) تكتب بعد علامة @ ويكتب قبل هذه العلامة اسم المتحكم .. كما في المثال السابق <b>تمرير البيانات</b></p>
+<pre>
+controller::__('index.users@get_info',[1,'karim']);
+</pre>
+                            <p>شكل الداله (function) في المتحكم (controller)</p>
+<pre>
+public function get_info ($user_id,$username)
+{ ...
+</pre>
+                        </div>
+                        <!-- /controller -->
+                        <!-- model -->
+                        <div class="doc" id="model">
+                            <div class="title"># نموذج - model</div>
+                            <p>لتحكم في model لا يختلف كثيرا عن التعامل مع المتحكم (controller) لكن هو يختلف في الوظيفة بشكل كبير .. وهي المحطة الاقرب للتعامل مع قواعد البيانات بشكل مباشر</p>
+                            <br />
+                            <p><b>الاستدعاء</b></p>
+<pre>
+model::__('index.users@login',['username','password']);
+</pre>
+                        <p>هنا نحن نقوم بالاتصال مع دالة (function) من المتحكم users لتسجيل الدخول وهنا نحن نقوم بارسال معلومات المستخدم الي الدالة</p>
+<pre>
+public function login ($user,$pass)
+{ ...
+</pre>
+                        <p>ويمكنك استخدام هذه البيانات في اجراءات قواعد البيانات .</p>
+                        <p>لكن المتحكم (controller) هو من يقوم باجراء جميع العمليات علي البيانات</p>
+                        </div>
+                        <!-- /model -->
+                        <!-- view -->
+                        <div class="doc" id="view">
+                            <div class="title"># العرض - view</div>
+                            <p>لعرض صفحاتك بتنسيق html فالامر بسيط وانت لن تكون في حاجه الي استخدام محرك عرض (view engine)</p>
+                            <br>
+                            <p><b>مجلد المحتوي</b></p>
+                            <p><code>name_app/views</code></p>
+                            <p>ويمكنك انشاء ملف جديد ويكون بامتداد <code>users.php</code> الامر بسيط</p>
+                            <br>
+                            <p><b>الاستدعاء</b></p>
+<pre>
+view::__('index.users');
+</pre>
+                            <p>يكتب اسم التطبيق ثم اسم الملف الموجود داخل مجلد views .. ويمكنك انشاء مجلدات اخري بشكل لا نهائي ولكن سوف تحتاج الي اضافه اسم المجلد</p>
+                            <br>
+                            <p><b>مثال</b></p>
+<pre>
+view::__('index.users.users');
+view::__('index.users.edit');
+</pre>
+                            <p><code>index/views/users/user.php</code>, <code>index/views/users/edit.php</code></p>
+                            <br>
+                            <p><b>تمرير البيانات</b></p>
+                            <p>لتمرير البيانات من المتحكم الي صفحات العرض ننقل البيانات في شكل مصفوفة</p>
+<pre>
+view::__('index.users',[
+    'name' => 'karim'
+]);
+</pre>
+<pre>
+&lt;h1&gt;&lt;?= $name ?&gt;&lt;/h1&gt;
+</pre>
+                        </div>
+                        <!-- /view -->
+                        <!-- librarys -->
+                        <div class="doc" id="librarys">
+                            <div class="title"># المكتبات - librarys</div>
+                            <p>من الاكيد انت تحتاج الي ادراج كود خارجي ويكون علي شكل class فالامر بسيط ولكن من خلال المتحكم (controller) انت سوف تقوم بادراج المكتبة بالشكل التالي</p>
+<pre>
+class controllerUploads extends controller
+{
+    public function __construct ()
+    {
+        $this->UP = $this->library('UploadHandler');
+    }
+}
+</pre>
+                            <p>اين يمكن وضع ملف المكتبة UploadHandler</p>
+                            <p><code>private/set_key/librarys/library.UploadHandler.php</code></p>
+                            <p>ويجب ان يكون اسم الكلاس بهذا الشكل</p>
+<pre>
+class UploadHandler
+{}
+</pre>
+                            <br>
+                            <p><b>استخدام construct</b></p>
+                            <p>يمكنك استخدام داله __construct للكلاس المدرج لتكون البرامتيرات علي شكل مصفوفة (Array)</p>
+<pre>
+class controllerUser extends controller
+{
+    public function __construct ()
+    {
+        $this->UP = $this->library('nameClass',['karim',21]);
+    }
+}
+</pre>
+<pre>
+class nameClass
+{
+    public function __construct ($arr)
+    {
+        echo 'Name: ' . $arr[0] . ' Age: ' . $arr[1];
+    }
+}
+</pre>
+                        </div>
+                        <!-- librarys -->
+                        <!-- langs -->
+                        <div class="doc" id="langs">
+                            <div class="title"># تعدد اللغات - lang</div>
+                            <p>اذا كنت تعمل علي مشروع وسوف يكون متعدد اللغات فلا مشكله في الامر بسيط .. ولكن سوف تقوم بانشاء ملف باسم اللغه والتكن علي سبيل المثال <code>ar.php</code></p>
+                            <p>يحتوي الملف علي مصفوفة والتي تحتوي علي مفتاح والقيمة</p>
+                            <p><code>private/set_key/langs/ar.php</code></p>
+                            <br/>
+                            <p><b>مثال</b></p>
+<pre>
+return [
+    'Username' => 'اسم المستخدم',
+]
+</pre>      
+<pre>
+&lt;h1&gt;&lt;?= lang::__('Username') ?&gt;&lt;/h1&gt;
+</pre>
+                            <p>تعمل اللغه علي حسب القيمة الموجودة داخل ملف <code>app.php</code></p>
+<pre>
+/*
+# LANG
+-> Put the language file name
+*/
+'lang' => 'ar',
+</pre>
+<pre>
+'lang' => $_COOKIE['lang'],
+</pre>                            
+                        </div>
+                        <!-- langs -->
+                        <!-- rooq -->
+                        <div class="doc" id="rooq">
+                            <div class="title"># اوامر - rooq</div>
+                            <p>يوجد مجموعه من الاوامر التي تعمل علي تسهيل العمل .. من اجل توفير الوقت</p>
+                            <br/>
+                            <p><b>امر key</b></p>
+                            <div class="command">php rooq key</div>
+                        </div>
+                        <!-- rooq -->
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="src/js/jquery-1.11.3.min.js"></script>
+    <script src="http://komicho.com/wp-content/themes/me/js/jquery.pinBox.min.js"></script>
+    <script src="src/js/bootstrap.min.js"></script>
+    <script src="src/js/prettyprint.js"></script>
+    <script src="src/js/code.js"></script>
+<style>
+.prettyprint{
+	display: block;
+    line-height: 1.42857143;
+	font-size: 11pt;
+    line-height: 1.3;
+	text-align:left;
+	direction:ltr;
+    background-color: #333;
+	padding: 7px !important;
+}
+.com { color: #93a1a1; }
+.lit { color: #195f91; }
+.pun, .opn, .clo { color: #93a1a1; }
+.fun { color: #dc322f; }
+.str, .atv { color: #a3be8c; }
+.kwd, .prettyprint .tag { color: #bf616a; }
+.typ, .atn, .dec, .var { color: #d08770; }
+.pln {color: #C1C1C1;}
+.pun{color: #7791A5;}
+</style>
+
+</html>

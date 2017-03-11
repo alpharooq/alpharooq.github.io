@@ -1,0 +1,95 @@
+@import url("css/bootstrap.min.css");
+@import url("css/bootstrap.rtl.css");
+@import url("css/bootstrap.edit.css");
+@font-face{
+    font-family: 'DroidKufi_Regular';
+    src: url('css/DroidKufi_Regular.ttf');
+}
+*{
+    outline: none;
+    font-family: 'DroidKufi_Regular', sans-serif;
+}
+body{
+    background: #f9f9f9;
+}
+body > section.box_home{
+    width: 100%;
+    height: 90vh;
+    background: #ddd;
+    text-align: center;
+}
+body > section.box_home h1{
+    margin: 0px;
+    margin-bottom: 15px;
+}
+body > section.box_home p{
+    color: #555;
+    font-size: 13pt;
+}
+body > section.box_home div.commands{
+    width: 47%;
+    background: #333;
+    border-radius: 5px;
+    color: #ddd;
+    font-size: 11pt;
+    text-align: left;
+    direction: ltr;
+    line-height: 1;
+    padding: 15px;
+    margin: 15px auto 0px auto;
+}
+body > section.box_home div.commands .comment{
+    color: #777;
+}
+body > section.box_home div.commands .command{
+    color: #eee;
+}
+body > section.box_home a{
+    color:  #333;
+    font-size: 15pt;
+}
+body > section.box_home_des{
+    width: 100%;
+    height: 10vh;
+    background: #eee;
+    border-top: 3px solid #09f;
+}
+body > section.home_box{
+    width: 100%;
+    height: 90vh;
+    background: #ddd;
+}
+section.list{
+    width: auto;
+    padding: 15px;
+}
+section.docs{
+    width: auto;
+    padding: 15px;
+}
+section.docs > .doc{
+    width: auto;
+    background: #f3f3f3;
+    border-top: 3px solid #09f;
+    padding: 15px;
+    margin-bottom: 59px;
+}
+section.docs > .doc .title{
+    color: #555;
+    font-size: 25pt;
+    margin-bottom: 15px;
+}
+section.docs > .doc p{
+    color: #333;
+    font-size: 13pt;
+}
+section.docs > .doc .command{
+    color: #fff;
+    line-height: 1;
+    background: #555;
+    border-radius: 3px;
+    text-align: left;
+    direction: ltr;
+    padding: 5px;
+    margin: 5px 0px;
+}

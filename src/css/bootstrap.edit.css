@@ -1,0 +1,13 @@
+a.list-group-item, button.list-group-item {
+    background: rgba(0, 0, 0, 0);
+    color: #555;
+    font-size: 10pt;
+    border-right: 5px solid #09f;
+    margin-bottom: 5px;
+}
+.list-group-item{
+    border: 0;
+}
+.list-group-item:first-child,.list-group-item:last-child{
+    border-radius: 0;
+}
