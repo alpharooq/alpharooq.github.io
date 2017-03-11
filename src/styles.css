@@ -53,6 +53,12 @@ body > section.box_home_des{
     height: 10vh;
     background: #eee;
     border-top: 3px solid #09f;
+    text-align: left;
+}
+body > section.box_home_des img{
+    width: 39px;
+    height: 39px;
+    margin: 11px;
 }
 body > section.home_box{
     width: 100%;

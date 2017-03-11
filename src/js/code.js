@@ -11,7 +11,7 @@ $(document).ready(function() {
     });
 
 });     
-$(document).on('click','a', function(event) {
+$(document).on('click','a.godiv', function(event) {
     event.preventDefault();
     var target = "#" + this.getAttribute('godiv');
     $('html, body').animate({
