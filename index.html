@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
         <title>Documentation - alpharooq</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <link href="src/styles.css" rel="stylesheet"/>
@@ -41,7 +42,7 @@
                         <div class="list-group">
                             <a href="#" godiv="librarys" class="godiv list-group-item">المكتبات - librarys</a>
 <!--                            <a href="#" godiv="routes" class="list-group-item">قواعد البينات - db</a>-->
-                            <a href="#" godiv="langs" class="godiv list-group-item">تعدد اللغات - lang</a>
+                            <a href="#" godiv="langs" class="godiv list-group-item">تعدد اللغات - language</a>
                             <a href="#" godiv="rooq" class="godiv list-group-item">اوامر - rooq</a>
                         </div>
                     </section>
@@ -73,7 +74,7 @@
 <pre>
 // routes
 route::get('/',function(){
-    controller::__('index.def@home');
+    controller('index.def@home');
 });
 route::other('/');
 route::run();
@@ -89,7 +90,7 @@ route::get('/user/(.*)',function($id){
                             <p>ويمكن تمرير البيانات الي المتحكم (controller) ويمكنك اجراء مجموعه اوامر علي هذه البيانات التي تم تمريرها الي المتحكم</p>
 <pre>
 route::get('/user/(.*)',function($id){
-    controller::__('index.def@home',[$id]);
+    controller('index.def@home',[$id]);
 });
 </pre>
                             <p>ويكون شكل الدالة (function) بهذا الشكل</p>
@@ -100,7 +101,7 @@ public function home ($id) {
                             <p><b>الاجراء post</b></p>
 <pre>
 route::post('/login',function(){
-    controller::__('index.users@login');
+    controller('index.users@login');
 });
 </pre>
                             <p><b>استخدام other</b></p>
@@ -128,11 +129,11 @@ class controllerUsers extends controller
                             <p><b>استدعاء المتحكم</b></p>
                             <p>ويمكنك استدعاء المتحكم بكل سهولة من خلال الكود التالي</p>
 <pre>
-controller::__('index.users@get_info');
+controller('index.users@get_info');
 </pre>
                             <p>وهنا يكون اسم الداله (function) تكتب بعد علامة @ ويكتب قبل هذه العلامة اسم المتحكم .. كما في المثال السابق <b>تمرير البيانات</b></p>
 <pre>
-controller::__('index.users@get_info',[1,'karim']);
+controller('index.users@get_info',[1,'karim']);
 </pre>
                             <p>شكل الداله (function) في المتحكم (controller)</p>
 <pre>
@@ -148,7 +149,7 @@ public function get_info ($user_id,$username)
                             <br />
                             <p><b>الاستدعاء</b></p>
 <pre>
-model::__('index.users@login',['username','password']);
+model('index.users@login',['username','password']);
 </pre>
                         <p>هنا نحن نقوم بالاتصال مع دالة (function) من المتحكم users لتسجيل الدخول وهنا نحن نقوم بارسال معلومات المستخدم الي الدالة</p>
 <pre>
@@ -170,21 +171,21 @@ public function login ($user,$pass)
                             <br>
                             <p><b>الاستدعاء</b></p>
 <pre>
-view::__('index.users');
+view('index.users');
 </pre>
                             <p>يكتب اسم التطبيق ثم اسم الملف الموجود داخل مجلد views .. ويمكنك انشاء مجلدات اخري بشكل لا نهائي ولكن سوف تحتاج الي اضافه اسم المجلد</p>
                             <br>
                             <p><b>مثال</b></p>
 <pre>
-view::__('index.users.users');
-view::__('index.users.edit');
+view('index.users.users');
+view('index.users.edit');
 </pre>
                             <p><code>index/views/users/user.php</code>, <code>index/views/users/edit.php</code></p>
                             <br>
                             <p><b>تمرير البيانات</b></p>
                             <p>لتمرير البيانات من المتحكم الي صفحات العرض ننقل البيانات في شكل مصفوفة</p>
 <pre>
-view::__('index.users',[
+view('index.users',[
     'name' => 'karim'
 ]);
 </pre>
@@ -238,10 +239,10 @@ class nameClass
                         <!-- librarys -->
                         <!-- langs -->
                         <div class="doc" id="langs">
-                            <div class="title"># تعدد اللغات - lang</div>
+                            <div class="title"># تعدد اللغات - language</div>
                             <p>اذا كنت تعمل علي مشروع وسوف يكون متعدد اللغات فلا مشكله في الامر بسيط .. ولكن سوف تقوم بانشاء ملف باسم اللغه والتكن علي سبيل المثال <code>ar.php</code></p>
                             <p>يحتوي الملف علي مصفوفة والتي تحتوي علي مفتاح والقيمة</p>
-                            <p><code>private/set_key/langs/ar.php</code></p>
+                            <p><code>apps/&lt;APPNAME&gt;/language/ar.php</code></p>
                             <br/>
                             <p><b>مثال</b></p>
 <pre>
@@ -250,7 +251,7 @@ return [
 ]
 </pre>      
 <pre>
-&lt;h1&gt;&lt;?= lang::__('Username') ?&gt;&lt;/h1&gt;
+&lt;h1&gt;&lt;?= lang('Username') ?&gt;&lt;/h1&gt;
 </pre>
                             <p>تعمل اللغه علي حسب القيمة الموجودة داخل ملف <code>app.php</code></p>
 <pre>
